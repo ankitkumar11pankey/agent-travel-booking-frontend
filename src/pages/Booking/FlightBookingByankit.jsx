@@ -1,12 +1,14 @@
 
 
-import React, { useEffect, useState } from "react";
+
+
+
+import React, { useState } from "react";
 import { CalendarDays } from "lucide-react";
 import Demo from "./Demo";
 import Swal from "sweetalert2";
-import { getData, postData } from '../../services/apiService';
+import { postData } from '../../services/apiService';
 import { useNavigate } from "react-router-dom";
-import Demo1 from "./Demo1";
 
 export default function FlightBooking() {
   const [formData, setFormData] = useState({
@@ -22,7 +24,6 @@ export default function FlightBooking() {
     flightClass: "",
     passengers: 1,
     boardingPoint: "",
-    clientID:"",
     // honorifics:"",
     // totalAmount: "",
   });
@@ -34,15 +35,7 @@ export default function FlightBooking() {
   ]);
 
   const [multipleTripDetails, setMultipleTripDetails] = useState([])
-  const [roundtrip, Setroundtrip] = useState({
-    from: "",
-    to: "",
-    airline: "",
-    flightClass: "",
-    departureDate: "",
-    bording: "",
-  })
-  const [clientPassenger, setClientPassenger] = useState([])
+
   const [bookingType, setBookingType] = useState("single")
   const [errors, setErrors] = useState({});
 
@@ -51,11 +44,6 @@ export default function FlightBooking() {
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    if (name == "from") {
-      Setroundtrip((prev) => ({ ...prev, to: value }))
-    } else if (name == "to") {
-      Setroundtrip((prev) => ({ ...prev, from: value }))
-    }
     setFormData({
       ...formData,
       [name]: type === "checkbox" ? checked : value,
@@ -102,7 +90,7 @@ export default function FlightBooking() {
 
     passengerDetails.forEach((p, i) => {
       if (!p.name.trim()) newErrors[`pname${i}`] = `Passenger ${i + 1} name required`;
-      // if (!p.age.trim()) newErrors[`page${i}`] = `Passenger ${i + 1} age required`;
+      if (!p.age.trim()) newErrors[`page${i}`] = `Passenger ${i + 1} age required`;
       if (!p.gender) newErrors[`pgender${i}`] = `Passenger ${i + 1} gender required`;
     });
 
@@ -114,8 +102,8 @@ export default function FlightBooking() {
     setMultipleTripDetails([...multipleTripDetails, { from: "", to: "", boardingPoint: "", departureDate: "", airline: "", flightClass: "" }])
   }
   function handleDelete(index) {
-    if (multipleTripDetails.length > 1)
-      setMultipleTripDetails(prev => prev.filter((_, i) => i !== index))
+    if(multipleTripDetails.length>1)
+    setMultipleTripDetails(prev => prev.filter((_, i) => i !== index))
   }
   function hanldeMutipleTripChange(index, e) {
     setMultipleTripDetails(prev => {
@@ -124,23 +112,6 @@ export default function FlightBooking() {
       return updated;
     })
   }
-  async function getClientPassengers() {
-    try {
-      const res = await getData("/api/passengers/clients/"+formData.clientID)
-       setClientPassenger(res.passengers)
-    } catch (error) {
-      console.log(error);
-      
-      
-    }
-  }
-  useEffect(()=>{
-    console.log("geting passeng");
-    
-    if(formData.clientID){
-      getClientPassengers()
-    }
-  },[formData.clientID])
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (validate()) {
@@ -165,9 +136,6 @@ export default function FlightBooking() {
           passengers: passengerDetails,
           airline: formData.airline
         },
-        tripType: bookingType,
-        roundTrip: roundtrip,
-        multipleTripDetails:multipleTripDetails
       };
 
       console.log(obj, " xyzabc");
@@ -306,7 +274,7 @@ export default function FlightBooking() {
               <div><input type="radio" name="booking-type" onChange={() => setBookingType("round")} id="round" />
                 <label htmlFor="round">Round Tripe</label>
               </div>
-              <div><input type="radio" name="booking-type" onChange={() => { setBookingType("multi"); hanleAddNew() }} id="multipleTripDetails" />
+              <div><input type="radio" name="booking-type" onChange={() => { setBookingType("multi"); hanleAddNew() }} id="multiple" />
                 <label htmlFor="multiple">Multiple Trip</label>
               </div>
 
@@ -431,7 +399,7 @@ export default function FlightBooking() {
                   <input
                     type="text"
                     name="from"
-                    value={roundtrip.from}
+                    value={formData.to}
                     disabled
                     onChange={handleChange}
                     className="w-full px-4 py-2 border rounded-lg"
@@ -446,7 +414,7 @@ export default function FlightBooking() {
                     type="text"
                     disabled
                     name="to"
-                    value={roundtrip.to}
+                    value={formData.from}
                     onChange={handleChange}
                     className="w-full px-4 py-2 border rounded-lg"
                     placeholder="Arrival city"
@@ -459,8 +427,8 @@ export default function FlightBooking() {
                   <input
                     type="text"
                     name="boardingPoint"
-                    value={roundtrip.bording}
-                    onChange={({ target }) => Setroundtrip((prev) => ({ ...prev, bording: target.value }))}
+                    value={formData.boardingPoint}
+                    onChange={handleChange}
                     className="w-full px-4 py-2 border rounded-lg"
                     placeholder="Bording city"
                   />
@@ -474,8 +442,8 @@ export default function FlightBooking() {
                     <input
                       type="date"
                       name="departureDate"
-                      value={roundtrip.departureDate}
-                      onChange={({ target }) => Setroundtrip((prev) => ({ ...prev, departureDate: target.value }))}
+                      value={formData.departureDate}
+                      onChange={handleChange}
                       className="w-full pl-10 pr-4 py-2 border rounded-lg"
                     />
                   </div>
@@ -507,9 +475,8 @@ export default function FlightBooking() {
                   <input
                     type="text"
                     name="airline"
-                    value={roundtrip.airline}
-                    onChange={({ target }) => Setroundtrip((prev) => ({ ...prev, airline: target.value }))}
-
+                    value={formData.airline}
+                    onChange={handleChange}
                     className="w-full px-4 py-2 border rounded-lg"
                     placeholder="Enter Airline Name"
                   />
@@ -520,9 +487,8 @@ export default function FlightBooking() {
                   <label className="block text-sm mb-1">Class *</label>
                   <select
                     name="flightClass"
-                    value={roundtrip.flightClass}
-                    onChange={({ target }) => Setroundtrip((prev) => ({ ...prev, flightClass: target.value }))}
-
+                    value={formData.flightClass}
+                    onChange={handleChange}
                     className="w-full px-4 py-2 border rounded-lg"
                   >
                     <option value="">Select class</option>
@@ -534,11 +500,11 @@ export default function FlightBooking() {
               </div>
             </div>
           )}
-          {bookingType === "multi" && (
+          {bookingType === "Mutiple Trip" && (
             <div>
               {multipleTripDetails.map((item, index) => (
                 <div className="grid rounded-xl mt-3 grid-cols-1 md:grid-cols-2 gap-4">
-                  <h3>Multiple Journey Details {index + 2}</h3>
+              <h3>Multiple Journey Details {index+2}</h3>
 
                   <div className="flex justify-end">
                     <button className="bg-red-500 text-white px-4 py-2 rounded-xl" type="button" onClick={() => handleDelete(index)}>Remove</button>
@@ -668,7 +634,14 @@ export default function FlightBooking() {
               </div>
 
               <div>
-                <Demo1 formData={passengerDetails} setFormData={setPassengerDetails} index={index} clientData={clientPassenger}/>
+                <input
+                  type="text"
+                  name="name"
+                  value={p.name}
+                  onChange={(e) => handlePassengerChange(index, e)}
+                  placeholder={`Passenger ${index + 1} Name`}
+                  className="w-full px-4 py-2 border rounded-lg"
+                />
                 {errors[`pname${index}`] && (
                   <p className="text-red-500 text-sm">{errors[`pname${index}`]}</p>
                 )}
@@ -726,3 +699,5 @@ export default function FlightBooking() {
     </div>
   );
 }
+
+

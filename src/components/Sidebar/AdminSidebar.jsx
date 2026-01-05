@@ -13,7 +13,12 @@ import {
   Ban ,
    ChevronDown,
   ChevronRight,
+
   BuildingIcon,
+  Printer,
+  User,
+  BookImageIcon,
+  // pageXOffset
 
 } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -31,7 +36,7 @@ export default function AdminSidebar({ onClose }) {
   const menuItems = [
     { name: "Dashboard", path: "/admin", icon: <BarChart3 size={18} /> },
     { name: "Agent Management", path: "/admin/agents", icon: <Users size={18} /> },
-    { name: "Inquiry", path: "/admin/inquiry", icon: <FileText size={18} /> },
+    // { name: "Inquiry", path: "/admin/inquiry", icon: <FileText size={18} /> },
     // { name: "Bookings", path: "/admin/bookings", icon: <BookOpen size={18} /> },
     {
     name: "Bookings",
@@ -44,9 +49,26 @@ export default function AdminSidebar({ onClose }) {
     ],
     
   },
-    {name: "Booking Sources", path:"/admin/booking-sources", icon:<Users size={18} />},
-    {name: "Accounting" , path:"/admin/Accounting" ,  icon : <Users size={18}/> },
+   {
+    name: "Accounts",
+    icon: <BookOpen size={18} />,
+    children: [
+      {name: "CustomerStatus" , path:"/admin/CustomerStatus" ,  icon : <Users size={18}/> },
+      { name: "Cash Book", path: "/admin/accounts/cash-book", icon: <FileText size={18} /> },
+      {name:"ShowLager" , path:"/admin/ShowLager" , icon:<RefreshCw size={18}/> }
+      
+    ],
+    
+  },
+  {name:"allpassanger",path:"/admin/allpassanger",icon:<User size={18}/>},
+    {name:"allclient",path:"/admin/allclient",icon:<User size={18}/>},
+    {name: "Booking Sources", path:"/admin/booking-sources", icon:<BookImageIcon size={18} />},
+    // {name: "Accounting" , path:"/admin/Accounting" ,  icon : <Users size={18}/> },
+
     {name: "Campany" , path:"/admin/campany" ,  icon :  <BuildingIcon size={18}/> },
+     {name:"print ", path:"/admin/print" , icon:<Printer size={18}/>  },
+     {name:"All Bill", path:"/admin/AllBill" , icon:<FileText size={18}/>  }
+    
 
   ];
 

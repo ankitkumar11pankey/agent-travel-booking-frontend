@@ -1,162 +1,5 @@
 
 
-// import React, { useState, useEffect } from "react";
-// import { Pencil, Trash2 } from "lucide-react";
-// import AddAgentModal from "./AddAgentModal";
-// import { getData } from "../../services/apiService";
-
-// const Agents = () => {
-//   const [agents, setAgents] = useState([]);
-//   const [showModal, setShowModal] = useState(false);
-// const[data,setdata]=useState([]);
-
-//   useEffect(()=>{
-//     fetchAgents();
-//   },[]);
-//   const fetchAgents=async()=>{
-//     try {
-//       const res = await getData("/api/admin/getAllAgents");
-//       console.log(res);
-//       setdata(res?.agents
-//       );
-//     }
-  
-//     catch (error) {
-//       console.error("Error fetching agents:", error);
-//     } 
-//   }
-
-//   useEffect(() => {
-//     const saved = JSON.parse(localStorage.getItem("agents")) || [];
-//     setAgents(saved);
-//   }, []);
-
-//   useEffect(() => {
-//     localStorage.setItem("agents", JSON.stringify(agents));
-//   }, [agents]);
-
-//   const handleAddAgent = (newAgent) => {
-//     setAgents([
-//       ...agents,
-//       { ...newAgent, status: "Active" }, // default active
-//     ]);
-//   };
-
-//   const toggleStatus = (index) => {
-//     const updated = [...agents];
-//     updated[index].Agentstatus =
-//       updated[index].status === "Active" ? "Inactive" : "Active";
-//     setAgents(updated);
-//   };
-
-//   const handleDelete = (index) => {
-//     if (window.confirm("Are you sure you want to delete this agent?")) {
-//       const updated = [...agents];
-//       updated.splice(index, 1);
-//       setAgents(updated);
-//     }
-//   };
-
-//   return (
-//     <div className="p-6">
-//       {/* Header */}
-//       <div className="flex justify-between items-center mb-5">
-//         <h1 className="text-2xl font-semibold text-gray-800">Manage Agents</h1>
-//         <button
-//           onClick={() => setShowModal(true)}
-//           className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
-//         >
-//           + Add Agent
-//         </button>
-//       </div>
-
-//       {/* Table */}
-//       <div className="overflow-x-auto bg-white shadow rounded-xl border border-gray-200">
-//         <table className="min-w-full text-left">
-//           <thead className="bg-gray-100 text-gray-700 text-sm">
-//             <tr>
-//               <th className="py-3 px-4 border-b">Full Name</th>
-//               <th className="py-3 px-4 border-b">Email</th>
-//               <th className="py-3 px-4 border-b">Phone</th>
-//               <th className="py-3 px-4 border-b">Location</th>
-//               <th className="py-3 px-4 border-b text-center">Status</th>
-//               <th className="py-3 px-4 border-b text-center">Action</th>
-//             </tr>
-//           </thead>
-
-//           <tbody className="text-sm text-gray-800">
-//             {data.length === 0 ? (
-//               <tr>
-//                 <td
-//                   colSpan="6"
-//                   className="text-center text-gray-500 py-6 italic"
-//                 >
-//                   No agents added yet.
-//                 </td>
-//               </tr>
-//             ) : (
-//               data.map((a, i) => (
-//                 <tr
-//                   key={i}
-//                   className="hover:bg-gray-50 transition-colors duration-150"
-//                 >
-//                   <td className="py-3 px-4 border-b">{a.name}</td>
-//                   <td className="py-3 px-4 border-b">{a.email}</td>
-//                   <td className="py-3 px-4 border-b">{a.phone}</td>
-//                   <td className="py-3 px-4 border-b">{a.location}</td>
-
-//                   {/* Status Badge */}
-//                   <td className="py-3 px-4 border-b text-center">
-//                     <button
-//                       onClick={() => toggleStatus(i)}
-//                       className={`px-3 py-1.5 text-xs font-medium rounded-full transition ${
-//                         a.status === "Active"
-//                           ? "bg-green-100 text-green-700 hover:bg-green-200"
-//                           : "bg-red-100 text-red-700 hover:bg-red-200"
-//                       }`}
-//                     >
-//                       {a.Agentstatus}
-//                     </button>
-//                   </td>
-
-//                   {/* Actions */}
-//                   <td className="py-3 px-4 border-b text-center">
-//                     <div className="flex items-center justify-center gap-3">
-//                       <button
-//                         className="p-1.5 text-blue-600 hover:text-blue-800 transition"
-//                         title="Edit"
-//                       >
-//                         <Pencil size={16} />
-//                       </button>
-//                       <button
-//                         onClick={() => handleDelete(i)}
-//                         className="p-1.5 text-red-500 hover:text-red-700 transition"
-//                         title="Delete"
-//                       >
-//                         <Trash2 size={16} />
-//                       </button>
-//                     </div>
-//                   </td>
-//                 </tr>
-//               ))
-//             )}
-//           </tbody>
-//         </table>
-//       </div>
-
-//       {/* Add Modal */}
-//       {showModal && (
-//         <AddAgentModal
-//           onClose={() => setShowModal(false)}
-//           onAdd={handleAddAgent}
-//         />
-//       )}
-//     </div>
-//   );
-// };
-
-// export default Agents;
-
 
 import React, { useState, useEffect } from "react";
 import { Pencil, Trash2 } from "lucide-react";
@@ -176,6 +19,8 @@ const Agents = () => {
     try {
       const res = await getData("/api/admin/getAllAgents");
       console.log(res);
+      
+      
       setData(res?.agents || []);
     } catch (error) {
       console.error("Error fetching agents:", error);
@@ -316,7 +161,7 @@ const Agents = () => {
         </table>
       </div>
 
-      {/* Add Modal */}
+      
       {showModal && (
         <AddAgentModal
           onClose={() => setShowModal(false)}

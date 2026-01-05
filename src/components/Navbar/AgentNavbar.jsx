@@ -16,8 +16,7 @@ export default function AgentNavbar({ onMenuClick }) {
   };
 
   return (
-    <nav className="flex justify-between items-center bg-white shadow px-6 py-3 border-b">
-  
+    <nav className="flex justify-between items-center bg-gradient-to-r from-white via-blue-500 to-blue-500 shadow-md px-6 py-3 border-b border-blue-300 transition-all duration-300">
       <div className="flex items-center space-x-3">
         <button
           onClick={onMenuClick}
@@ -25,7 +24,7 @@ export default function AgentNavbar({ onMenuClick }) {
         >
           <Menu size={20} className="text-gray-700" />
         </button>
-
+    
          <h1 className="text-lg font-semibold text-purple-800">
           {isAgent ? "Agent Dashboard" : "Agent Dashboard"}
         </h1>

@@ -34,15 +34,7 @@ const AgentBookingTable = () => {
     }
   };
 
-  //  Sorting Logic
-  // const handleSort = (column) => {
-  //   if (sortColumn === column) {
-  //     setSortOrder(sortOrder === "asc" ? "desc" : "asc");
-  //   } else {
-  //     setSortColumn(column);
-  //     setSortOrder("asc");
-  //   }
-  // };
+ 
   const handleSort = (column) => {
     if (sortColumn === column) {
       setSortOrder(sortOrder === "asc" ? "desc" : "asc");
@@ -64,22 +56,6 @@ const AgentBookingTable = () => {
       )
     );
 
-  // ✅ Sorting Applied After Filter
-  // const sortedData = [...filteredData].sort((a, b) => {
-  //   if (!sortColumn) return 0;
-
-  //   let valA = a[sortColumn];
-  //   let valB = b[sortColumn];
-
-  //   if (sortColumn === "date" || sortColumn === "createdAt") {
-  //     valA = new Date(valA);
-  //     valB = new Date(valB);
-  //   }
-
-  //   if (valA < valB) return sortOrder === "asc" ? -1 : 1;
-  //   if (valA > valB) return sortOrder === "asc" ? 1 : -1;
-  //   return 0;
-  // });
   const sortedData = [...filteredData].sort((a, b) => {
     if (!sortColumn) return 0;
 
@@ -228,7 +204,7 @@ const AgentBookingTable = () => {
                    
                     {row.journeyDate}
                   </td>
-                  <td className="px-6 py-4 text-sm text-gray-900 capitalize">
+                  <td className="w-[20rem] py-4 text-sm text-gray-900 capitalize">
                     {row.from} → {row.to}
                   </td>
                   <td className="px-6 py-4 text-sm text-gray-900 capitalize">
@@ -244,9 +220,7 @@ const AgentBookingTable = () => {
                      
                       <FaEdit />
                     </button>
-                    {/* <button className="text-green-500 hover:text-green-700">
-                      <FaEye />
-                    </button> */}
+                   
                     <button
                       className="text-yellow-500 hover:text-yellow-700"
                       onClick={() => handleUpdate(row)}

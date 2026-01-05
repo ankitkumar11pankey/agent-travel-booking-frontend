@@ -47,7 +47,7 @@ export default function AddBookingSourceModal({ onClose, onAdd, editing = null, 
     if (editing && onSaveEdit) {
       onSaveEdit(payload);
     } else if (onAdd) {
-      // Add new
+     
       onAdd(payload);
     }
 

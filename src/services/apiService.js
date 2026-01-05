@@ -1,9 +1,9 @@
-// src/services/apiService.js
+
 
 import axios from "axios";
 import { API_BASE_URL } from "../config/apiConfig";
 
-// Axios instance create karo
+
 const api = axios.create({
   baseURL: API_BASE_URL,
   headers: {
@@ -12,10 +12,10 @@ const api = axios.create({
   
 });
 
-// 🔹 Request Interceptor — har request me token add karega
+
 api.interceptors.request.use(
   (config) => {
-    const token = sessionStorage.getItem("adminsession"); // <-- sessionStorage se le rahe hain
+    const token = sessionStorage.getItem("adminsession"); 
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -24,7 +24,7 @@ api.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-// 🔹 Response Interceptor — error handle karne ke liye
+
 api.interceptors.response.use(
   (response) => response,
   (error) => {
@@ -33,7 +33,7 @@ api.interceptors.response.use(
   }
 );
 
-// 🔹 Reusable API Functions
+
 
 export const getData = async (url, params = {}) => {
   const response = await api.get(API_BASE_URL+url, { params });

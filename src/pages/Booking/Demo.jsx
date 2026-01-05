@@ -1,121 +1,4 @@
-// import React, { useState, useEffect } from "react";
-// import { Combobox } from "@headlessui/react";
-// import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 
-// export default function Demo({ fromdata, setFormData }) {
-//   const [options, setOptions] = useState([]);
-//   const [inputValue, setInputValue] = useState("");
-//   const [selected, setSelected] = useState(null);
-//   const [loading, setLoading] = useState(false);
-
-//   // Fetch options dynamically (simulate API)
-//   useEffect(() => {
-//     if (!inputValue) return;
-//     setLoading(true);
-//     const timer = setTimeout(() => {
-//       // Mock API filter
-//       setOptions(
-//         ["Amit Sharma", "Ankit Pandey", "Priya Verma", "Rahul Kumar"]
-//           .filter((name) =>
-//             name.toLowerCase().includes(inputValue.toLowerCase())
-//           )
-//           .map((name) => ({ name }))
-//       );
-//       setLoading(false);
-//     }, 500);
-//     return () => clearTimeout(timer);
-//   }, [inputValue]);
-
-//   const handleSelect = (value) => {
-//     if (typeof value === "string") {
-//       console.log("New customer:", value);
-//       setSelected({ name: value });
-//     } else {
-//       console.log("Existing customer:", value);
-//       setSelected(value);
-//     }
-//   };
-
-//   return (
-//     <div className="w-full">
-//       <Combobox value={selected} onChange={handleSelect}>
-//         <div className="relative">
-//           <div className="relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left border border-gray-300 focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-blue-500">
-//             <Combobox.Input
-//               className="w-full border-none py-2 pl-3 pr-10 text-gray-900 placeholder-gray-400 focus:ring-0"
-//               placeholder="INPUT/SELECT CUSTOMER NAME"
-//               displayValue={(option) => option?.name || ""}
-//               onChange={(e) => setInputValue(e.target.value)}
-//             />
-//             <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">
-//               {loading ? (
-//                 <svg
-//                   className="animate-spin h-5 w-5 text-gray-400"
-//                   xmlns="http://www.w3.org/2000/svg"
-//                   fill="none"
-//                   viewBox="0 0 24 24"
-//                 >
-//                   <circle
-//                     className="opacity-25"
-//                     cx="12"
-//                     cy="12"
-//                     r="10"
-//                     stroke="currentColor"
-//                     strokeWidth="4"
-//                   ></circle>
-//                   <path
-//                     className="opacity-75"
-//                     fill="currentColor"
-//                     d="M4 12a8 8 0 018-8v4l5-5-5-5v4a10 10 0 00-10 10h4z"
-//                   ></path>
-//                 </svg>
-//               ) : (
-//                 <ChevronUpDownIcon className="h-5 w-5 text-gray-400" />
-//               )}
-//             </Combobox.Button>
-//           </div>
-
-//           {options.length > 0 && (
-//             <Combobox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white border border-gray-200 shadow-lg z-10">
-//               {options.map((person, idx) => (
-//                 <Combobox.Option
-//                   key={idx}
-//                   className={({ active }) =>
-//                     `relative cursor-pointer select-none py-2 pl-10 pr-4 ${
-//                       active ? "bg-blue-100 text-blue-900" : "text-gray-900"
-//                     }`
-//                   }
-//                   value={person}
-//                 >
-//                   {({ selected, active }) => (
-//                     <>
-//                       <span
-//                         className={`block truncate ${
-//                           selected ? "font-medium" : "font-normal"
-//                         }`}
-//                       >
-//                         {person.name}
-//                       </span>
-//                       {selected ? (
-//                         <span
-//                           className={`absolute inset-y-0 left-0 flex items-center pl-3 ${
-//                             active ? "text-blue-600" : "text-blue-600"
-//                           }`}
-//                         >
-//                           <CheckIcon className="h-5 w-5" aria-hidden="true" />
-//                         </span>
-//                       ) : null}
-//                     </>
-//                   )}
-//                 </Combobox.Option>
-//               ))}
-//             </Combobox.Options>
-//           )}
-//         </div>
-//       </Combobox>
-//     </div>
-//   );
-// }
 
 import React, { useState, useEffect } from "react";
 import { Combobox } from "@headlessui/react";
@@ -149,7 +32,7 @@ export default function Demo({ formData, setFormData }) {
  const getuserData=async()=>{
     try {
       const res = await getData('/api/clients/search');
-      setData(res|| []);
+       setData(res|| []);
       console.log(res);
     }
     catch (error) {
@@ -178,7 +61,7 @@ export default function Demo({ formData, setFormData }) {
       console.log("Existing customer:", value);
       setSelected(value);
       setInputValue(value.name);
-      setFormData((prev)=>({ ...prev, clientName: value.name, email: value.email,phone: value.phone }));
+      setFormData((prev)=>({ ...prev, clientName: value.name, email: value.email,phone: value.phone, clientID: value.id  }) );
 
     }
   };

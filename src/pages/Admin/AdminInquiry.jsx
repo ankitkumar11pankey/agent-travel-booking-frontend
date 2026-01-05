@@ -6,11 +6,11 @@ import { getData, putData } from "../../services/apiService";
 export default function AdminInquiry() {
   const [isModalOpen, setModalOpen] = useState(false);
   const [inquiries, setInquiries] = useState([]);
-  const [agents, setAgents] = useState([]); // Agent list for assigning
-  const [openAssignId, setOpenAssignId] = useState(null); // which row’s dropdown is open
-  const [selectedAgents, setSelectedAgents] = useState([]); // selected checkboxes
+  const [agents, setAgents] = useState([]); 
+  const [openAssignId, setOpenAssignId] = useState(null); 
+  const [selectedAgents, setSelectedAgents] = useState([]); 
 
-  // Load data from localStorage
+
   useEffect(() => {
 
     const fetchInquiries = async () => {
@@ -29,7 +29,7 @@ export default function AdminInquiry() {
   const getallagent = async () => {
     try {
       const data = await getData("/api/admin/getAllAgents");
-      // setInquiries(data.enquiries);
+
       setAgents(data.agents);
       console.log("Agents:", data.agents);
     }
@@ -54,7 +54,7 @@ export default function AdminInquiry() {
   };
 
   const handleAssign = async (inquiryId) => {
-    // yahan pe API call bhi kar sakte ho
+
 
     console.log("Assigning inquiry:", inquiryId, "to agents:", selectedAgents);
     alert(`Inquiry ${inquiryId} assigned to agents: ${selectedAgents.join(", ")}`);
@@ -76,7 +76,7 @@ export default function AdminInquiry() {
 
   return (
     <div className="p-6">
-      {/* Header */}
+    
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-semibold text-gray-800">
           Admin Inquiries
@@ -89,7 +89,7 @@ export default function AdminInquiry() {
         </button>
       </div>
 
-      {/* Table */}
+      
       <div className="bg-white rounded-lg shadow overflow-x-auto">
         <table className="w-full text-sm text-left">
           <thead className="bg-gray-100 text-gray-700">
@@ -121,7 +121,7 @@ export default function AdminInquiry() {
                     {inq.role === "admin" ? (
                       <>
                         <div className="flex items-center gap-2 relative">
-                          {/* Dropdown on left side */}
+                         
                           {openAssignId === inq.id && (
                             <div className="absolute left-[-220px] bg-white border shadow-lg rounded-lg p-3 w-52 z-20">
                               <p className="font-semibold text-gray-700 mb-2">Select Agent</p>
@@ -155,7 +155,7 @@ export default function AdminInquiry() {
                             </div>
                           )}
 
-                          {/* Button that triggers dropdown modal */}
+                          
                           <button
                             onClick={() =>
                               setOpenAssignId(openAssignId === inq.id ? null : inq.id)
@@ -189,7 +189,7 @@ export default function AdminInquiry() {
         </table>
       </div>
 
-      {/* Modal */}
+    
       <Modal
         isOpen={isModalOpen}
         onClose={() => setModalOpen(false)}

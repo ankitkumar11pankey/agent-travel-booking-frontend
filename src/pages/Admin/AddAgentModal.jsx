@@ -1,90 +1,3 @@
-// import React, { useState } from "react";
-
-// const AddAgentModal = ({ onClose, onAdd }) => {
-//   const [agent, setAgent] = useState({
-//     name: "",
-//     email: "",
-//     phone: "",
-//     location: "",
-//   });
-
-//   const handleChange = (e) => {
-//     const { name, value } = e.target;
-//     setAgent({ ...agent, [name]: value });
-//   };
-
-//   const handleSubmit = () => {
-//     if (!agent.name || !agent.email || !agent.phone || !agent.location) {
-//       alert("Please fill all fields");
-//       return;
-//     }
-
-//     onAdd(agent); // send data to parent
-//     setAgent({ name: "", email: "", phone: "", location: "" });
-//     onClose(); // close modal
-//   };
-
-//   return (
-//     <div className="fixed inset-0 flex items-center justify-center bg-black/50 bg-opacity-40 z-50">
-//       <div className="bg-white p-6 rounded-2xl shadow-lg w-[400px]">
-//         <h2 className="text-lg font-semibold mb-1">Add New Agent</h2>
-//         <p className="text-sm text-gray-500 mb-4">
-//           Fill in the details below to add a new travel agent.
-//         </p>
-
-//         <div className="space-y-3">
-//           <input
-//             name="name"
-//             placeholder="Full Name"
-            
-//             value={agent.name}
-//             onChange={handleChange}
-//             className="w-full border rounded-lg px-3 py-2 outline-none focus:ring focus:ring-indigo-200"
-//           />
-//           <input
-//             name="email"
-//             placeholder="Email"
-//             value={agent.email}
-//             onChange={handleChange}
-//             className="w-full border rounded-lg px-3 py-2 outline-none focus:ring focus:ring-indigo-200"
-//           />
-//           <input
-//             name="phone"
-//             placeholder="Phone"
-//             value={agent.phone}
-//             onChange={handleChange}
-//             className="w-full border rounded-lg px-3 py-2 outline-none focus:ring focus:ring-indigo-200"
-//           />
-//           <input
-//             name="location"
-//             placeholder="Location"
-//             value={agent.location}
-//             onChange={handleChange}
-//             className="w-full border rounded-lg px-3 py-2 outline-none focus:ring focus:ring-indigo-200"
-//           />
-//         </div>
-
-//         <div className="flex justify-end gap-3 mt-6">
-//           <button
-//             onClick={onClose}
-//             className="px-4 py-2 border rounded-lg hover:bg-gray-100"
-//           >
-//             Cancel
-//           </button>
-//           <button
-//             onClick={handleSubmit}
-//             className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700"
-//           >
-//             Add Agent
-//           </button>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default AddAgentModal;
-
 
 
 import React, { useState ,useEffect} from "react";
@@ -144,7 +57,6 @@ const AddAgentModal = ({ onClose, onAdd }) => {
           </button>
         </div>
 
-        {/* Form */}
         <div className="space-y-4 mt-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">

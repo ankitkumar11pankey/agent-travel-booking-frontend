@@ -16,12 +16,12 @@ export default function Navbar({ onMenuClick }) {
   };
 
   return (
-    <nav className="flex justify-between items-center bg-white shadow px-6 py-3 border-b">
+    <nav className="flex justify-between items-center bg-gradient-to-r from-white via-blue-100 to-blue-300 shadow-md px-6 py-3 border-b border-blue-300 transition-all duration-300">
      
-      <div className="flex items-center space-x-3">
+      <div className="flex items-center  space-x-3">
         <button
           onClick={onMenuClick}
-          className="p-2 rounded-md hover:bg-gray-100 transition"
+          className="p-2 rounded-md  hover:bg-gray-100 transition"
         >
           <Menu size={20} className="text-gray-700" />
         </button>
@@ -34,7 +34,7 @@ export default function Navbar({ onMenuClick }) {
         
         <button
           onClick={handleLogout}
-          className="flex items-center border border-gray-300 text-sm font-medium text-gray-700 rounded-lg px-3 py-1.5 hover:bg-gray-100 hover:border-gray-400 hover:text-red-500 transition-all duration-200"
+          className="flex border border-black items-center text-sm font-medium text-gray-700 rounded-lg px-3 py-1.5 hover:bg-gray-100 hover:border-gray-400 hover:text-red-500 transition-all duration-200"
         >
           <LogOut size={18} className="mr-1" /> Logout
         </button>

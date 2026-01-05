@@ -3,7 +3,7 @@
 
 import React from "react";
 import { BarChart3, Users, BookOpen, FileText, X, RefreshCw, Ban ,ChevronDown,
-  BuildingIcon, ChevronRight,} from "lucide-react";
+  BuildingIcon, ChevronRight,Printer} from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
@@ -20,7 +20,7 @@ export default function AdminSidebar({ onClose }) {
   const menuItems = [
     { name: "Dashboard", path: "/agent", icon: <BarChart3 size={18} /> },
     // { name: "Agent Management", path: "/admin/agents", icon: <Users size={18} /> },
-    { name: "Inquiry", path: "/agent/inquiry", icon: <FileText size={18} /> },
+    // { name: "Inquiry", path: "/agent/inquiry", icon: <FileText size={18} /> },
     // { name: "Bookings", path: "/agent/bookings", icon: <BookOpen size={18} /> },
      {
         name: "Bookings",
@@ -32,14 +32,28 @@ export default function AdminSidebar({ onClose }) {
          
         ],
       },
+
+      {
+          name: "Accounts",
+          icon: <BookOpen size={18} />,
+          children: [
+            {name: "CustomerStatus" , path:"/agent/CustomerStatus" ,  icon : <Users size={18}/> },
+            { name: "Cash Book", path: "/agent/accounts/cash-book", icon: <FileText size={18} /> },
+            {name:"ShowLager" , path:"/agent/ShowLager" , icon:<RefreshCw size={18}/> }
+            
+          ],
+          
+        },
       {name: "Booking Sources", path:"/agent/booking-sources", icon:<Users size={18} />},
-       {name: "Accounting" , path:"/agent/Accounting" ,  icon : <Users size={18}/> },
+      //  {name: "Accounting" , path:"/agent/Accounting" ,  icon : <Users size={18}/> },
       {name: "Campany" , path:"/agent/campany" ,  icon :  <BuildingIcon size={18}/> },
+       {name:"print ", path:"/agent/print" , icon:<Printer size={18}/>  },
+     {name:"All Bill", path:"/agent/AllBill" , icon:<FileText size={18}/>  }
       
   ];
 
   return (
-    <div className="w-64 bg-white border-r shadow-sm min-h-screen flex flex-col justify-between">
+    <div className="w-64 bg-gradient-to-b from-white via-blue-50 to-blue-200 shadow-lg min-h-screen flex flex-col justify-between border-r border-blue-300">
       
       <div>
         <div className="flex items-center justify-between px-6 py-4 border-b">
