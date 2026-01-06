@@ -24,7 +24,7 @@ const AllBill = () => {
   const handleViewBill = (billNo) => {
     navigate(`/bill-view/${billNo}`);
   };
-
+const role = sessionStorage.getItem("role")
 
   useEffect(() => {
     const fetchBills = async () => {
@@ -179,7 +179,7 @@ const AllBill = () => {
 
                       <button
                         onClick={() =>
-                          navigate("/admin/print", {
+                          navigate(`/${role}/print`, {
                             state: { billNo: bill.billNo }
                           })
                         }

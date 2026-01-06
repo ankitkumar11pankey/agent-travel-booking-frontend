@@ -16,6 +16,7 @@ const Print = () => {
   const [showBill, setShowBill] = useState(false);
   const [billData, setBillData] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [extraAmount, setExtraAmount]  = useState(0)
 
   const dropdownRef = useRef(null);
   const location=useLocation();
@@ -57,8 +58,10 @@ const Print = () => {
       setLoading(true);
       const res = await getData(`/api/invoices/bill/${billNo}`);
       if (!res || res.success === false) return alert("Bill not found");
-      // console.log(res.ledgers.filter(item=>item.entryType=="credit") || []);
-      setPayments(res.ledgers.filter(item=>item.entryType=="credit" && item.bookingId==res.invoice.booking.id) || []);
+      if(selectedCompany.gstNumber){
+        setExtraAmount((Number(res.invoice.bookingUpdate.typeServiceCharge) + Number(res.invoice.bookingUpdate.bookingCharge)) * 0.18)
+      }
+      setPayments(res.payments || []);
       setBillData(res.invoice || res);
       setShowBill(true);
     } catch (error) {
@@ -262,11 +265,20 @@ const Print = () => {
                         <td className="border px-2">Service Charge</td>
                         <td className="border px-2">{billData.bookingUpdate?.typeServiceCharge || 0}</td>
                       </tr>
-                    
 
+                      {selectedCompany.gstNumber ? 
+                       <tr>
+                        <td className="border px-2">GST Amount</td>
+                        <td className="border px-2">{extraAmount}</td>
+                      </tr> :null  
+                    }
+                    
+                        
                       <tr>
-                        <td className="border px-2">Total</td>
-                        <td className="border px-2">{billData.bookingUpdate?.totalAmount || 0}</td>
+                        
+                        <td className="border font-bold px-2">Total</td>
+                        <td className="border font-bold px-2">{Number(billData.bookingUpdate?.totalAmount)+Number(extraAmount) || 0}</td>
+                       
                       </tr>
 
                      
@@ -280,7 +292,7 @@ const Print = () => {
                       </tr>
                       <tr>
                         <td className="border px-2">Paid Amount</td>
-                        <td className="border px-2">{billData.cancelledBooking?.paidAmount || payments[0]?.amount|| 0}</td>
+                        <td className="border px-2">{billData.cancelledBooking?.paidAmount || payments[0]?.receivingAmount || 0}</td>
                       </tr>
                       <tr>
                         <td className="border px-2">Cancellation Remaining</td>
@@ -290,8 +302,8 @@ const Print = () => {
 
 
                       <tr>
-                        <td className="border px-2">Balance To Pay</td>
-                        <td className="border px-2">{ billData.cancelledBooking?.remainingAmount || payments.length > 0 && (billData.booking.totalAmount-payments[0].amount)  || billData?.bookingUpdate?.totalAmount || 0}</td>
+                        <td className="border font-bold px-2">Balance To Pay</td>
+                        <td className="border font-bold px-2">{ Number(billData.cancelledBooking?.remainingAmount || payments.length > 0 && (payments[0].totalRemainingBalance)  || billData?.bookingUpdate?.totalAmount) + Number(extraAmount)}</td>
                       </tr>
                     </tbody>
                   </table>
@@ -302,7 +314,7 @@ const Print = () => {
 
               <p className="text-center mt-4 italic">"We Assure Best Service Always"</p>
 
-              <div className="flex justify-between mt-10">
+              <div className="flex gap-3 mt-10">
                 <p>For :</p>
                 <p className="font-bold">{selectedCompany.companyName || selectedCompany.name}</p>
               </div>

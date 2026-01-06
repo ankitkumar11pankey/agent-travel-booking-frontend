@@ -71,11 +71,15 @@ export default function PaymentForm({formData, setFromData}) {
          
           <div>
             <label className="text-sm font-medium"> Ticket Amount (₹) *</label>
-            <input type="number" value={formData.ticketAmount} name="ticketAmount" onChange={handleformData} className="w-full border rounded-md px-3 py-2 mt-1" />
+            <input type="text" onInput={(e) => {
+    e.target.value = e.target.value.replace(/[^0-9]/g, "");
+  }} inputmode="numeric" value={formData.ticketAmount} name="ticketAmount" onChange={handleformData} className="w-full border rounded-md px-3 py-2 mt-1" />
           </div>
             <div>
             <label className="text-sm font-medium">Booking  charge (₹)</label>
-            <input type="number" value={formData.bookingCharge} name="bookingCharge" onChange={handleformData} className="w-full border rounded-md px-3 py-2 mt-1" />
+            <input type="text"   onInput={(e) => {
+    e.target.value = e.target.value.replace(/[^0-9]/g, "");
+  }} inputmode="numeric" value={formData.bookingCharge} name="bookingCharge" onChange={handleformData} className="w-full border rounded-md px-3 py-2 mt-1" />
           </div>
           <div>
             <label className="text-sm font-medium">Ticket Type {formData.ticketType}</label>
@@ -101,15 +105,21 @@ export default function PaymentForm({formData, setFromData}) {
           </div>
           <div>
             <label className="text-sm font-medium">Type Service Charge (₹)</label>
-            <input type="number" value={formData.typeServiceCharge} name="typeServiceCharge" onChange={handleformData} className="w-full border rounded-md px-3 py-2 mt-1" />
+            <input type="text" onInput={(e) => {
+    e.target.value = e.target.value.replace(/[^0-9]/g, "");
+  }} inputmode="numeric"  value={formData.typeServiceCharge} name="typeServiceCharge" onChange={handleformData} className="w-full border rounded-md px-3 py-2 mt-1" />
           </div>
            <div>
             <label className="text-sm font-medium">Other charge (₹)</label>
-            <input type="number" value={formData.otherCharge} name="otherCharge" onChange={handleformData} className="w-full border rounded-md px-3 py-2 mt-1" />
+            <input type="text"   onInput={(e) => {
+    e.target.value = e.target.value.replace(/[^0-9]/g, "");
+  }} inputmode="numeric" value={formData.otherCharge} name="otherCharge" onChange={handleformData} className="w-full border rounded-md px-3 py-2 mt-1" />
           </div>
           <div>
             <label className="text-sm font-medium">Total Amount (₹) </label>
-            <input type="number" value={formData?.totalAmount} name="totalAmount" readOnly className="w-full border rounded-md px-3 py-2 mt-1 bg-gray-100" />
+            <input type="text"  onInput={(e) => {
+    e.target.value = e.target.value.replace(/[^0-9]/g, "");
+  }} inputmode="numeric"  value={formData?.totalAmount} name="totalAmount" readOnly className="w-full border rounded-md px-3 py-2 mt-1 bg-gray-100" />
           </div>
           
           

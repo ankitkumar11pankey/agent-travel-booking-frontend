@@ -202,18 +202,6 @@ const role=sessionStorage.getItem("role")
         <div>
           <h3 className="font-medium text-gray-700 mb-3">Train Information</h3>
           <div className="grid grid-cols-2 gap-4">
-            
-
-            <div>
-              <label>Train Number</label>
-              <input
-                type="text"
-                name="trainNumber"
-                value={formData.trainNumber}
-                onChange={handleChange}
-                className="border rounded-lg px-4 py-2 w-full"
-              />
-            </div>
 
             <div>
               <label>Train Name</label>

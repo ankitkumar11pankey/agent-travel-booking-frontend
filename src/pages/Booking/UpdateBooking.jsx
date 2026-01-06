@@ -62,6 +62,7 @@ const role=sessionStorage.getItem("role")
     chequeNumber: "",
     chequeBankName: "",
     chequeTransactionDate: "",
+    Cash:"",
   });
 
   
@@ -446,7 +447,7 @@ const role=sessionStorage.getItem("role")
        
 
              <div>
-              <label className="font-medium"> Total  Remaining Balance </label>
+              <label className="font-medium"> Total  Remaining Balance (Without GST)</label>
             </div>
             <input
               type="number"    
@@ -471,7 +472,7 @@ const role=sessionStorage.getItem("role")
 
            
             <div>
-              <label className="font-medium"> TicketTotalAmount </label>
+              <label className="font-medium"> TicketTotalAmount(Without GST) </label>
             </div>
             <p
               className="w-full border p-2 rounded mb-2"
@@ -503,6 +504,7 @@ const role=sessionStorage.getItem("role")
               <option value="card">Credit Card</option>
               <option value="upi">UPI</option>
               <option value="cheque">Cheque</option>
+               <option value="Cash">Cash</option>
             </select>
 
             {paymentType === "bank" && (
@@ -515,6 +517,9 @@ const role=sessionStorage.getItem("role")
                   onChange={(e) =>
                     setFormData({ ...formData, bankName: e.target.value })
                   }
+                   onInput={(e) => {
+    e.target.value = e.target.value.replace(/[^a-zA-Z]/g, "");
+  }}
                 />
 
                 <input
@@ -551,6 +556,9 @@ const role=sessionStorage.getItem("role")
                   onChange={(e) =>
                     setFormData({ ...formData, cardNumber: e.target.value })
                   }
+                   onInput={(e) => {
+    e.target.value = e.target.value.replace(/[^0-9]/g, "");
+  }}
                 />
 
                 <input
@@ -561,6 +569,9 @@ const role=sessionStorage.getItem("role")
                   onChange={(e) =>
                     setFormData({ ...formData, cardType: e.target.value })
                   }
+                   onInput={(e) => {
+    e.target.value = e.target.value.replace(/[^a-zA-Z]/g, "");
+  }}
                 />
 
                 <input
@@ -574,6 +585,9 @@ const role=sessionStorage.getItem("role")
                       cardHolderName: e.target.value,
                     })
                   }
+                   onInput={(e) => {
+    e.target.value = e.target.value.replace(/[^a-zA-Z]/g, "");
+  }}
                 />
 
                 <input
@@ -613,6 +627,9 @@ const role=sessionStorage.getItem("role")
                       upiTransactionId: e.target.value,
                     })
                   }
+                   onInput={(e) => {
+    e.target.value = e.target.value.replace(/[^0-9]/g, "");
+  }}
                 />
 
                 <input
@@ -639,6 +656,9 @@ const role=sessionStorage.getItem("role")
                   onChange={(e) =>
                     setFormData({ ...formData, chequeNumber: e.target.value })
                   }
+                   onInput={(e) => {
+    e.target.value = e.target.value.replace(/[^0-9]/g, "");
+  }}
                 />
 
                 <input
@@ -649,6 +669,9 @@ const role=sessionStorage.getItem("role")
                   onChange={(e) =>
                     setFormData({ ...formData, chequeBankName: e.target.value })
                   }
+                   onInput={(e) => {
+    e.target.value = e.target.value.replace(/[^a-zA-Z]/g, "");
+  }}
                 />
 
                 <input
@@ -665,14 +688,26 @@ const role=sessionStorage.getItem("role")
               </>
             )}
 
+
+             {paymentType === "Cash" && (
+              <>
+    
+               
+              </>
+            )}
+
             <input
-              type="number"
+              type="text"
               placeholder="Payment Amount"
               className="w-full border p-2 rounded mb-2"
               value={formData.paymentAmount}
+
               onChange={(e) =>
                 setFormData({ ...formData, paymentAmount: Number(e.target.value) })
               }
+              onInput={(e) => {
+    e.target.value = e.target.value.replace(/[^0-9]/g, "");
+  }} inputmode="numeric"
             />
 
             <div className="flex justify-between mt-3">

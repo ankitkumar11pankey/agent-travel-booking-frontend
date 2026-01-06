@@ -69,6 +69,7 @@ function App() {
           {/* <Route path="Conform-booking" element={<ConformBooking/>} */}
           <Route path="canceld-booking" element={<Canceldbooking/>}/>
           <Route path="cancel-from/:type/:id"  element={<CancellationForm />} />
+          
 
           <Route
             path="booking/update-booking/:mode/:id"
